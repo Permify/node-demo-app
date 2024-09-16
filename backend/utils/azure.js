@@ -8,11 +8,13 @@
  */
 const createUserOrganizationRelation = async (sender, tenantId, userId, organizationId, role) => {
     const body = {
-        action: "createUserOrganizationRelation",
-        tenantId,
-        userId,
-        organizationId,
-        role
+        action: "writeData",
+        tenantId: tenantId,
+        subjectType: "user",
+        subjectId: userId,
+        entityType: "organization",
+        entityId: organizationId,
+        relation: role
     };
 
     try {
@@ -39,11 +41,13 @@ const createUserOrganizationRelation = async (sender, tenantId, userId, organiza
  */
 const createUserRepositoryRelation = async (sender, tenantId, userId, repositoryId, role) => {
     const body = {
-        action: "createUserRepositoryRelation",
-        tenantId,
-        userId,
-        repositoryId,
-        role
+        action: "writeData",
+        tenantId: tenantId,
+        subjectType: "user",
+        subjectId: userId,
+        entityType: "repository",
+        entityId: repositoryId,
+        relation: role
     };
 
     try {

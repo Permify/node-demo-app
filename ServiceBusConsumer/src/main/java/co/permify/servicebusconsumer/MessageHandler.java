@@ -14,7 +14,7 @@ public class MessageHandler {
     // Function to handle different actions based on the action field in the message body
     public void handleAction(String action, String messageBody) throws Exception {
         switch (action) {
-            case "createUserOrganizationRelation":
+            case "writeData":
                 // Call your method for creating user-organization relation
                 this.handleWriteData(messageBody);
                 break;
