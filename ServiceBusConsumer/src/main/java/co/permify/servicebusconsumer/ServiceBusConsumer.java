@@ -10,7 +10,6 @@ import com.microsoft.azure.servicebus.IMessageReceiver;
 import com.microsoft.azure.servicebus.ReceiveMode;
 import com.microsoft.azure.servicebus.primitives.ConnectionStringBuilder;
 
-
 public class ServiceBusConsumer {
 
     private final PermifyClientWrapper permifyClient = new PermifyClientWrapper(); // Create PermifyClient instance
@@ -59,28 +58,29 @@ public class ServiceBusConsumer {
             }
         }
     }
-public static void main(String[] args) {
-    System.exit(runApp(args, (connectionString, queueName) -> {
-        ServiceBusConsumer app = new ServiceBusConsumer();
-        try {
-            app.run(connectionString, queueName);
-            return 0;
-        } catch (Exception e) {
-            System.err.printf("Error: %s%n", e.toString());
-            return 1;
-        }
-    }));
-}
 
-public static int runApp(String[] args, BiFunction<String, String, Integer> run) {
-    if (args.length < 2) {
-        System.err.println("Usage: ServiceBusConsumer <connectionString> <queueName>");
-        return 2;
+    public static void main(String[] args) {
+        System.exit(runApp(args, (connectionString, queueName) -> {
+            ServiceBusConsumer app = new ServiceBusConsumer();
+            try {
+                app.run(connectionString, queueName);
+                return 0;
+            } catch (Exception e) {
+                System.err.printf("Error: %s%n", e.toString());
+                return 1;
+            }
+        }));
     }
 
-    String connectionString = args[0];
-    String queueName = args[1];
+    public static int runApp(String[] args, BiFunction<String, String, Integer> run) {
+        if (args.length < 2) {
+            System.err.println("Usage: ServiceBusConsumer <connectionString> <queueName>");
+            return 2;
+        }
 
-    return run.apply(connectionString, queueName);
-}
+        String connectionString = args[0];
+        String queueName = args[1];
+
+        return run.apply(connectionString, queueName);
+    }
 }

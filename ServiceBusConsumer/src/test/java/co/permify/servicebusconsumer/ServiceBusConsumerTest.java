@@ -8,7 +8,7 @@ public class ServiceBusConsumerTest {
     @Test
     public void run() throws Exception {
         Assert.assertEquals(0,
-            ServiceBusConsumer.runApp(new String[0], (connectionString, queueName) -> {
+                ServiceBusConsumer.runApp(new String[0], (connectionString, queueName) -> {
                     ServiceBusConsumer app = new ServiceBusConsumer();
                     try {
                         app.run(connectionString, queueName);
