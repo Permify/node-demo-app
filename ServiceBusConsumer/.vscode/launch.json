@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Java Console App",
+            "type": "java",
+            "request": "launch",
+            "stopOnEntry": true,
+            "cwd": "${workspaceRoot}",
+            "mainClass": "co.permify.servicebusconsumer.ServiceBusConsumer",
+            "args": [
+                "<connectionString>", 
+                "<queueName>"
+            ]
+        }
+    ]
+}
