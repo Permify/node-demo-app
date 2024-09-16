@@ -8,7 +8,6 @@ import org.permify.model.Tuple;
 
 public class MessageHandler {
 
-
     private final PermifyClientWrapper permifyClient = new PermifyClientWrapper();
 
     // Function to handle different actions based on the action field in the message body
