@@ -13,7 +13,7 @@ import com.microsoft.azure.servicebus.primitives.ConnectionStringBuilder;
 
 public class ServiceBusConsumer {
 
-    private final PermifyClient permifyClient = new PermifyClient(); // Create PermifyClient instance
+    private final PermifyClientWrapper permifyClient = new PermifyClientWrapper(); // Create PermifyClient instance
 
     public void run(String connectionString, String queueName) throws Exception {
         IMessageReceiver targetQueueReceiver;
