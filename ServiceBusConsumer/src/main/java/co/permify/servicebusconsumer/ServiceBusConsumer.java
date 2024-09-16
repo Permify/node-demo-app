@@ -10,20 +10,19 @@ import com.microsoft.azure.servicebus.IMessageReceiver;
 import com.microsoft.azure.servicebus.ReceiveMode;
 import com.microsoft.azure.servicebus.primitives.ConnectionStringBuilder;
 
+import org.json.JSONObject;
+
 public class ServiceBusConsumer {
 
-    private final PermifyClientWrapper permifyClient = new PermifyClientWrapper(); // Create PermifyClient instance
+    private final MessageHandler messageHandler = new MessageHandler(); // Create PermifyRequests
 
     public void run(String connectionString, String queueName) throws Exception {
         IMessageReceiver targetQueueReceiver;
-
-        System.out.printf("\nReceiving messages\n");
-
         // Receive messages from Azure Service Bus Queue
         targetQueueReceiver = ClientFactory.createMessageReceiverFromConnectionStringBuilder(
                 new ConnectionStringBuilder(connectionString, queueName), ReceiveMode.PEEKLOCK);
 
-        // Continuously receive and process messages
+        // Message processing loop
         while (true) {
             IMessage message = targetQueueReceiver.receive(Duration.ofSeconds(10));
 
@@ -31,9 +30,12 @@ public class ServiceBusConsumer {
                 // Print message details
                 printReceivedMessage(message);
 
-                // Send to Permify API using PermifyClient
                 try {
-                    permifyClient.sendToPermifyApi(new String(message.getBody(), StandardCharsets.UTF_8));
+                    String messageBody = new String(message.getBody(), StandardCharsets.UTF_8);
+                    JSONObject json = new JSONObject(messageBody);
+                    String action = json.getString("action");
+                    messageHandler.handleAction(action, messageBody);
+
                     // Complete the message if processed successfully
                     targetQueueReceiver.complete(message.getLockToken());
                 } catch (Exception e) {

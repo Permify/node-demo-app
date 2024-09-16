@@ -109,6 +109,17 @@
             <artifactId>guava</artifactId>
             <version>31.1-jre</version> <!-- Updated to a more recent version -->
         </dependency>
+        <dependency>
+            <groupId>co.permify</groupId>
+            <artifactId>permify</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version> <!-- Or the latest version available -->
+        </dependency>
+
     </dependencies>
 
 </project>
